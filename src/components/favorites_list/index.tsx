@@ -17,7 +17,6 @@ const ListContainer = styled.div<IListProps>`
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-  /* width: 45%; */
   flex-grow: 1;
   background-color: ${(props) => colorsLUT(props.background_color)};
   margin: 0.5rem;

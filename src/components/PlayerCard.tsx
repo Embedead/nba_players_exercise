@@ -55,8 +55,6 @@ const handleAddToFavorites = (
   if (!isIncluded) {
     tempFavorites.push(player);
     setFavorites(tempFavorites);
-  } else {
-    console.log("already in favorites");
   }
 };
 

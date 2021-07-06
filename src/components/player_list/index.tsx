@@ -89,10 +89,14 @@ export const PlayerList = ({ favorites, setFavorites }: IProps) => {
     setIsLoading(true);
     if (search !== "") {
       setSearchPage(1);
-      getPlayersBySearch(search).then((res) => {
-        let prunedPlayers = prunePlayerData(res.data.data);
-        handlePlayersSet(setPlayers, setIsLoading, prunedPlayers);
-      });
+      getPlayersBySearch(search)
+        .then((res) => {
+          let prunedPlayers = prunePlayerData(res.data.data);
+          handlePlayersSet(setPlayers, setIsLoading, prunedPlayers);
+        })
+        .catch((err) => {
+          console.log("no players found, error:", err);
+        });
     } else {
       setPage(1);
     }
@@ -101,10 +105,14 @@ export const PlayerList = ({ favorites, setFavorites }: IProps) => {
   React.useEffect(() => {
     setIsLoading(true);
     if (search !== "") {
-      getPlayersBySearch(search, searchPage.toString()).then((res) => {
-        let prunedPlayers = prunePlayerData(res.data.data);
-        handlePlayersSet(setPlayers, setIsLoading, prunedPlayers);
-      });
+      getPlayersBySearch(search, searchPage.toString())
+        .then((res) => {
+          let prunedPlayers = prunePlayerData(res.data.data);
+          handlePlayersSet(setPlayers, setIsLoading, prunedPlayers);
+        })
+        .catch((err) => {
+          console.log("no players found, error:", err);
+        });
     }
   }, [searchPage]);
 
