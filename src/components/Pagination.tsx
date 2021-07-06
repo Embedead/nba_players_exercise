@@ -8,6 +8,7 @@ import {
 interface IProps {
   page: number;
   pageSetter: (page: number) => void;
+  length: number;
 }
 
 const PaginationContainer = styled.div`
@@ -38,16 +39,18 @@ const pageLogics = (page: number, action: string) => {
   return page - 1;
 };
 
-export const Pagination = ({ page, pageSetter }: IProps) => {
+export const Pagination = ({ page, pageSetter, length }: IProps) => {
   return (
     <PaginationContainer>
       <IconContainer onClick={() => pageSetter(pageLogics(page, "-"))}>
         <ArrowLeft />
       </IconContainer>
       {page}
-      <IconContainer onClick={() => pageSetter(pageLogics(page, "+"))}>
-        <ArrowRight />
-      </IconContainer>
+      {length === 10 && (
+        <IconContainer onClick={() => pageSetter(pageLogics(page, "+"))}>
+          <ArrowRight />
+        </IconContainer>
+      )}
     </PaginationContainer>
   );
 };

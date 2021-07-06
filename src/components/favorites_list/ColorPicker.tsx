@@ -74,8 +74,6 @@ const colorOptions = ["black", "blue", "green", "red"];
 export const ColorPicker = ({ color, setColor }: IProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const colorRef = React.useRef(null);
-
-  console.log("is open is", isOpen);
   useOnClickOutside(colorRef, () => setIsOpen(false));
 
   const handlePick = (color: string) => {

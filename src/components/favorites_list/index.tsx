@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { ColorPicker } from "./ColorPicker";
 import { PlayerCard } from "../PlayerCard";
+import { colorsLUT } from "./colorLut";
 
 interface IProps {
-  favorites: any[];
-  setFavorites: (array: any[]) => void;
+  favorites: [] | IPlayer[];
+  setFavorites: (array: [] | IPlayer[]) => void;
 }
 
 interface IListProps {
@@ -16,9 +17,9 @@ const ListContainer = styled.div<IListProps>`
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-  width: 45%;
-  background-color: ${(props) =>
-    props.background_color ? props.background_color : "rgba(0, 0, 0, 0.5)"};
+  /* width: 45%; */
+  flex-grow: 1;
+  background-color: ${(props) => colorsLUT(props.background_color)};
   margin: 0.5rem;
 `;
 

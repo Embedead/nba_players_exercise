@@ -5,8 +5,8 @@ import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 interface IProps {
   player: IPlayer;
   favorited: boolean;
-  favorites: any[];
-  setFavorites: (favorites: any[]) => void;
+  favorites: [] | IPlayer[];
+  setFavorites: (favorites: [] | IPlayer[]) => void;
 }
 
 const PlayerContainer = styled.div`
@@ -46,8 +46,8 @@ const FavoriteCard = styled.span`
 `;
 
 const handleAddToFavorites = (
-  favorites: any[],
-  setFavorites: any,
+  favorites: [] | IPlayer[],
+  setFavorites: (newFavorites: [] | IPlayer[]) => void,
   player: IPlayer
 ) => {
   let tempFavorites = [...favorites];
@@ -61,8 +61,8 @@ const handleAddToFavorites = (
 };
 
 const handleRemoveFromFavorites = (
-  favorites: any[],
-  setFavorites: any,
+  favorites: [] | IPlayer[],
+  setFavorites: (newFavorites: [] | IPlayer[]) => void,
   player: IPlayer
 ) => {
   let tempFavorites = favorites.filter((item) => item !== player);
@@ -70,8 +70,8 @@ const handleRemoveFromFavorites = (
 };
 
 const handleAction = (
-  favorites: any[],
-  setFavorites: any,
+  favorites: [] | IPlayer[],
+  setFavorites: (newFavorites: [] | IPlayer[]) => void,
   player: IPlayer,
   favorited: boolean
 ) => {

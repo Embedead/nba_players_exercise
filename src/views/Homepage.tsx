@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FavoritesList } from "../components/favorites_list";
 import { PlayerList } from "../components/player_list/index";
+import { NbaHeader } from "../components/header";
 
 const HomepageContainer = styled.div`
   position: absolute;
@@ -11,17 +12,28 @@ const HomepageContainer = styled.div`
   overflow: auto;
   scroll-behavior: smooth;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+`;
+
+const HomepageRow = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: baseline;
   justify-content: center;
 `;
 
 export const Homepage = () => {
-  const [favorites, setFavorites] = React.useState<any[]>([]);
+  const [favorites, setFavorites] = React.useState<[] | IPlayer[]>([]);
 
   return (
     <HomepageContainer>
-      <PlayerList favorites={favorites} setFavorites={setFavorites} />
-      <FavoritesList favorites={favorites} setFavorites={setFavorites} />
+      <HomepageRow>
+        <NbaHeader />
+      </HomepageRow>
+      <HomepageRow>
+        <PlayerList favorites={favorites} setFavorites={setFavorites} />
+        <FavoritesList favorites={favorites} setFavorites={setFavorites} />
+      </HomepageRow>
     </HomepageContainer>
   );
 };
