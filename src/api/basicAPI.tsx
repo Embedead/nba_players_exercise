@@ -6,10 +6,6 @@ export const getAllPlayers = (page: string = "0", per_page: string = "10") => {
   return axios.get(base_url + "players?page=" + page + "&per_page=" + per_page);
 };
 
-export const getPlayerById = (playerID: string) => {
-  return axios.get(base_url + playerID);
-};
-
 export const getPlayersBySearch = (
   playerName: string,
   page: string = "0",
