@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const base_url = "https://www.balldontlie.io/api/v1/";
 
 export const getAllPlayers = (page: string = "0", per_page: string = "10") => {
