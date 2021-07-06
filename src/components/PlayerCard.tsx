@@ -4,6 +4,9 @@ import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 interface IProps {
   player: IPlayer;
+  favorited: boolean;
+  favorites: any[];
+  setFavorites: (favorites: any[]) => void;
 }
 
 const PlayerContainer = styled.div`
@@ -32,14 +35,59 @@ const PlayerInfo = styled.div`
 `;
 
 const FavoriteCard = styled.span`
-  /* width: 20%; */
   display: flex;
   justify-content: flex-end;
   align-items: center;
   font-size: 42px;
+  cursor: pointer;
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
 `;
 
-export const PlayerCard = ({ player }: IProps) => {
+const handleAddToFavorites = (
+  favorites: any[],
+  setFavorites: any,
+  player: IPlayer
+) => {
+  let tempFavorites = [...favorites];
+  let isIncluded = tempFavorites.includes(player);
+  if (!isIncluded) {
+    tempFavorites.push(player);
+    setFavorites(tempFavorites);
+  } else {
+    console.log("already in favorites");
+  }
+};
+
+const handleRemoveFromFavorites = (
+  favorites: any[],
+  setFavorites: any,
+  player: IPlayer
+) => {
+  let tempFavorites = favorites.filter((item) => item !== player);
+  setFavorites(tempFavorites);
+};
+
+const handleAction = (
+  favorites: any[],
+  setFavorites: any,
+  player: IPlayer,
+  favorited: boolean
+) => {
+  if (favorited) {
+    handleRemoveFromFavorites(favorites, setFavorites, player);
+  } else {
+    handleAddToFavorites(favorites, setFavorites, player);
+  }
+};
+
+export const PlayerCard = ({
+  player,
+  favorited,
+  favorites,
+  setFavorites,
+}: IProps) => {
   return (
     <PlayerContainer>
       <PlayerInfo>
@@ -50,8 +98,10 @@ export const PlayerCard = ({ player }: IProps) => {
         </PlayerRow>
         <label>Team: {player.team_name}</label>
       </PlayerInfo>
-      <FavoriteCard>
-        <MdFavoriteBorder />
+      <FavoriteCard
+        onClick={() => handleAction(favorites, setFavorites, player, favorited)}
+      >
+        {favorited ? <MdFavorite /> : <MdFavoriteBorder />}
       </FavoriteCard>
     </PlayerContainer>
   );
